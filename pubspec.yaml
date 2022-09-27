@@ -13,9 +13,9 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
+  flame_lint: ^0.1.2
   flutter_test:
     sdk: flutter
-  flame_lint: ^0.1.2
 
 flutter:
   uses-material-design: true

@@ -22,20 +22,20 @@ class LukasGame extends FlameGame with MouseMovementDetector, TapDetector {
         ..anchor = Anchor.center
         ..position = size / 2,
     );
-    world.add(RectangleSpinner(position: size / 2, size: size));
     addAll([world, cameraComponent]);
   }
 
   @override
-  void onTap() {
-    for (final spinner in world.children.query<RectangleSpinner>()) {
-      spinner.startEffect();
-    }
+  void onTapUp(TapUpInfo info) {
+    world.add(RectangleSpinner(position: info.eventPosition.game, size: size));
+    //for (final spinner in world.children.query<RectangleSpinner>()) {
+    //  spinner.startEffect();
+    //}
   }
 
   @override
   void onMouseMove(PointerHoverInfo info) {
-    final eventPosition = info.eventPosition.viewport;
+    //final eventPosition = info.eventPosition.viewport;
     //cameraComponent.viewfinder.position = info.eventPosition.viewport;
     //cameraComponent.viewfinder.anchor =
     //    Anchor(eventPosition.x / size.x, eventPosition.y / size.y);
