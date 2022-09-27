@@ -46,26 +46,24 @@ class RectangleSpinner extends PositionComponent {
   void stepOne() {
     children.query<RectangleComponent>().forEachIndexed((i, rectangle) {
       rectangle.addAll([
-        if (rectangle.children.whereType<ScaleEffect>().isEmpty)
-          ScaleEffect.to(
-            Vector2.all(0.2),
-            EffectController(
-              duration: 2 * 3,
-              repeatCount: 3,
-              alternate: true,
-            ),
+        ScaleEffect.to(
+          Vector2.all(0.2),
+          EffectController(
+            duration: 2 * 3,
+            repeatCount: 3,
+            alternate: true,
           ),
-        if (rectangle.children.whereType<RotateEffect>().length < 2)
-          RotateEffect.by(
-            3 * tau,
-            EffectController(
-              duration: 3 * 6,
-              startDelay: i * 0.1,
-              repeatCount: 2,
-              alternate: true,
-            ),
-            onComplete: i == amount - 1 ? stepTwo : null,
+        ),
+        RotateEffect.by(
+          3 * tau,
+          EffectController(
+            duration: 3 * 6,
+            startDelay: i * 0.1,
+            repeatCount: 2,
+            alternate: true,
           ),
+          onComplete: i == amount - 1 ? stepTwo : null,
+        ),
       ]);
     });
   }
@@ -73,25 +71,24 @@ class RectangleSpinner extends PositionComponent {
   void stepTwo() {
     children.query<RectangleComponent>().forEachIndexed((i, rectangle) {
       rectangle.addAll([
-        if (rectangle.children.whereType<RotateEffect>().length < 2)
-          RotateEffect.by(
-            3 * tau,
-            EffectController(
-              duration: 3 * 6,
-              startDelay: i * 0.1,
-              repeatCount: 2,
-              alternate: true,
-            ),
+        ScaleEffect.to(
+          Vector2.all(20.0),
+          EffectController(
+            duration: 2 * 3,
+            repeatCount: 3,
+            alternate: true,
           ),
-        if (rectangle.children.whereType<ScaleEffect>().isEmpty)
-          ScaleEffect.to(
-            Vector2.all(20.0),
-            EffectController(
-              duration: 2 * 3,
-              repeatCount: 3,
-              alternate: true,
-            ),
+        ),
+        RotateEffect.by(
+          3 * tau,
+          EffectController(
+            duration: 3 * 6,
+            startDelay: i * 0.1,
+            repeatCount: 2,
+            alternate: true,
           ),
+          onComplete: i == amount - 1 ? removeFromParent : null,
+        ),
       ]);
     });
   }
